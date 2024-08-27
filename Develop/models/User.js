@@ -18,7 +18,7 @@ const userSchema = new Schema(
         thoughts: [
             {
                 type: Schema.Types.ObjectId,
-                ref: "Thought" 
+                ref: "thought" 
             }
         ],
         friends: [
@@ -33,7 +33,7 @@ const userSchema = new Schema(
           virtuals: true,
         },
         id: false,
-      }
+    }
 );
 
 // Virtual Property called friendCount that retrieves the length of the users friends array on a query.
