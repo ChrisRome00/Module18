@@ -27,7 +27,7 @@ module.exports = {
             );
             if (!user) {
                 return res.status(404).json({
-                  message: 'Video created, but found no user with that ID',
+                  message: 'New Thought Created, but found no user with that ID',
                 });
             }
             return res.status(200).json({
@@ -63,8 +63,14 @@ module.exports = {
             if (!deleteThought) {
                 return res.status(404).json({ message: 'No Thought with this id!' });
             };
+            const updatedUser = await User.findOneAndUpdate(
+                { _id: req.params.userId },
+                { $pull: {thoughts: req.params.thoughtId} },
+                { new: true }
+            )
             return res.status(200).json({
-                message: "Successfully Deleted Thought"
+                message: "Successfully Deleted Thought",
+                updatedUser: updatedUser
             })
         } catch (err) {
             return res.status(500).json(err);

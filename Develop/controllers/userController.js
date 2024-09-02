@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const Thoughts = require('../models/Thought')
 // const Thoughts = require('../models/Thought');
 
 module.exports = {
@@ -48,7 +49,7 @@ module.exports = {
                 return res.status(404).json({ message: 'No user with that ID' });
             }
             // BONUS: Delete the Thoughts associated with this user
-            //await Thoughts.deleteMany({ _id: { $in: deletedUser.thoughts } });
+            await Thoughts.deleteMany({ _id: { $in: deletedUser.thoughts } });
             res.json({ message: 'User and associated thoughts deleted!' })
         } catch (err) {
             return res.status(500).json(err);
@@ -64,7 +65,10 @@ module.exports = {
             if (!user) {
                 return res.status(404).json({ message: 'No user with that ID' });
             }
-            return res.status(200).json(user);
+            return res.status(200).json({
+                message: "New Friend Added Successfully", 
+                user: user
+            });
         } catch (err) {
             return res.status(500).json(err); 
         }
