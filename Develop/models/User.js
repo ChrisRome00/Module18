@@ -45,4 +45,4 @@ userSchema.virtual('friendCount')
 // Initialize User model
 const User = model('user', userSchema)
 
-modules.exports = User;
+module.exports = User;
